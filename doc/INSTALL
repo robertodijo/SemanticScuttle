@@ -1,0 +1,81 @@
+new install ubuntu server
+
+Installing PHP5 and Apache on Ubuntu
+
+If you are doing any kind of PHP development, you’ll almost always be using Apache along with it. Here’s the quick and easy way to get PHP up and running on your Ubuntu box.
+
+First, you’ll want to add the extra repositories to Ubuntu’s sources.list file.
+
+From a command shell, you will run the following commands:
+
+    sudo apt-get install apache2
+
+    sudo apt-get install php5
+
+    sudo apt-get install libapache2-mod-php5
+
+    sudo /etc/init.d/apache2 restart
+
+Note that if apache is already installed you can omit the first line. Your web files will now be found in /var/www/
+
+If you have a mysql database server, then just install the mysql client:
+sudo apt-get install mysql-client
+
+Test to see if apache works: Go to the ipaddress of the newly installed server.
+
+
+
+PEAR package installation
+
+Apart from the normal installation, you may install the SemanticScuttle PEAR package - it gives you the ability to upgrade to the next version with a single command, without manually unzipping files.
+
+    The SemanticScuttle PEAR channel is available at http://semanticscuttle.sourceforge.net/pirum.html
+
+    Make sure you have the PEAR installer (or Pyrus) available and working. You can check that by running
+
+    $ sudo pear version
+    PEAR Version: 1.9.2
+    PHP Version: 5.3.6-13ubuntu3.2
+    Zend Engine Version: 2.3.0
+    Running on: Linux bogo 3.0.0-12-generic #20-Ubuntu SMP Fri Oct 7 14:56:25 UTC 2011 x86_64
+
+    Discover the channel if you haven't done so yet:
+
+    $ sudo pear channel-discover semanticscuttle.sourceforge.net
+
+    Verify that the channel has been added with:
+
+    $ sudo pear list-channels
+    Registered Channels:
+    ====================
+    Channel                         Alias     Summary
+    ...
+    semanticscuttle.sourceforge.net sc        SemanticScuttle PEAR channel
+    ...
+
+    Install SemanticScuttle:
+
+    $ sudo pear install sc/semanticscuttle-beta
+
+    Find out where it got installed to:
+
+    $ sudo pear list-files sc/semanticscuttle
+
+    Generally, the directory you need to point your web server's DocumentRoot to is the PEAR www directory + /SemanticScuttle/. Find the www directory with:
+
+    $ sudo pear config-get www_dir
+    /usr/share/php/htdocs
+
+    The configuration file is located in PEAR's data directory + /SemanticScuttle/:
+
+    $ pear config-get data_dir
+    /usr/share/php/data
+
+    In $data_dir/SemanticScuttle/, copy config.php.dist to config.php and continue with configuration.
+  
+  
+Configuration:
+==============
+
+
+
